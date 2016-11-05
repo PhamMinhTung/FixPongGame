@@ -255,7 +255,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// TODO Set Blue color
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100);
-			g.drawString(String.valueOf(playerOneScore), 400, 100);
+			g.drawString(String.valueOf(playerTwoScore), 400, 100);
 
 			// Draw the winner name
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
