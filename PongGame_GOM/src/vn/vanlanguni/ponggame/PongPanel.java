@@ -50,8 +50,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private boolean sPressed;
 
 	/** The ball: position, diameter */
-	private int ballX = 200;
-	private int ballY = 200;
+	private int ballX = 250;
+	private int ballY = 250;
 	private int diameter = 20;
 	private int ballDeltaX = -1;
 	private int ballDeltaY = 3;
@@ -213,7 +213,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
-			g.drawString("Press 'P' to play.", 175, 400);
+			g.drawString("Press 'P' to play.", 130, 400);
 		} else if (playing) {
 
 			/* Game is playing */
