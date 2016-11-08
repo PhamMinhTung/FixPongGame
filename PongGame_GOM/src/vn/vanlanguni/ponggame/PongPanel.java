@@ -299,6 +299,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			showTitleScreen = true;
 			playerOneY = 250;
 			playerTwoY = 250;
+			playerOneScore = 0;
+			playerTwoScore = 0;
 			ballX = 250;
 			ballY = 250;
 		}
