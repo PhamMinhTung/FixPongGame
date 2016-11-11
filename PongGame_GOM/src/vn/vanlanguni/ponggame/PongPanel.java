@@ -43,7 +43,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
-
+	ImageIcon imgpt = new ImageIcon("Image/pet.png");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -219,7 +219,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setColor(Color.BLUE);
 			g.drawString("Press 'P' to play.", 130, 400);
 		} else if (playing) {
-
+			g.drawImage(imgpt.getImage(),0,0,500,500,null);
 			/* Game is playing */
 
 			// set the coordinate limit
