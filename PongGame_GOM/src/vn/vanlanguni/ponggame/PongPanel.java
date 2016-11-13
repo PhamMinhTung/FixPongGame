@@ -57,6 +57,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int ballDeltaX = -1;
 	private int ballDeltaY = 3;
 	ImageIcon imgball;
+	ImageIcon imgpanel;
+	ImageIcon imgpanel2;
 	/** Player 1's paddle: position and size */
 	private int playerOneX = 0;
 	private int playerOneY = 250;
@@ -81,6 +83,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		setBackground(backgroundColor);
 		//ball
 		imgball = new ImageIcon("Image/ball_45.png");
+		imgpanel = new ImageIcon("Image/panel.png");
+		imgpanel2 = new ImageIcon("Image/panel2.png");
 		// listen to key presses
 		setFocusable(true);
 		addKeyListener(this);
@@ -249,8 +253,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.fillOval(ballX, ballY, diameter, diameter);
 			g.drawImage(imgball.getImage(),ballX, ballY, diameter, diameter,null);
 			// draw the paddles
-			g.fillRect(playerOneX, playerOneY, playerOneWidth, playerOneHeight);
-			g.fillRect(playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight);
+			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY, playerOneWidth, playerOneHeight, null);
+			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight, null);
+			//g.fillRect(playerOneX, playerOneY, playerOneWidth, playerOneHeight);
+			//g.fillRect(playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight);
 		} else if (gameOver) {
 
 			/* Show End game screen with winner name and score */
