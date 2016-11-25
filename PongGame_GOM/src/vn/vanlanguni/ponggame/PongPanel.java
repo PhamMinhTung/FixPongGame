@@ -43,7 +43,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
-	ImageIcon imgpt = new ImageIcon("Image/pet.png");
+	ImageIcon imgpt = new ImageIcon("Image/background.png");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
