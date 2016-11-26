@@ -45,6 +45,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int xRandom;
 	private int yRandom;
 	private int timeDisplay;
+	private int diameterRan= 25;
 	private boolean showRandom;
 
 	/** Background. */
@@ -212,12 +213,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			if (timeDisplay < 0) {
 				if (!showRandom) {
 					showRandom = true;
-					xRandom = ThreadLocalRandom.current().nextInt(50, 500 + 1);
-					yRandom = ThreadLocalRandom.current().nextInt(50, 500 + 1);
+					xRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
+					yRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
 				} else {
 					Point ballCenter = new Point(ballX + diameter / 2, ballY
 							+ diameter / 2);
-					Point ranCenter = new Point();
+					Point ranCenter = new Point(xRandom+diameterRan/2, yRandom+diameterRan/2);
 				}
 				if (timeDisplay < -10000) {
 					showRandom = false;
@@ -277,13 +278,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// draw the ball
 			g.setColor(Color.RED);
+			g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 			g.fillOval(ballX, ballY, diameter, diameter);
 			g.drawImage(imgball.getImage(),ballX, ballY, diameter, diameter,null);
 			// draw the paddles
 			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY, playerOneWidth, playerOneHeight, null);
 			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight, null);
 			if (showRandom) {
-				g.fillOval(xRandom, yRandom, 30, 30);
+				g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 			}
 		} else if (gameOver) {
 
