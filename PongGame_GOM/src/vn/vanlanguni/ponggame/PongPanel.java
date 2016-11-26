@@ -51,6 +51,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
 	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
+	ImageIcon imgdr = new ImageIcon("Image/welcome.jpg");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -258,9 +259,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// Draw game title and start message
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
+			g.drawImage(imgdr.getImage(), 0, 0, 500, 500, null);
 			g.setColor(Color.BLUE);
-			g.drawString("Pong Game", 130, 100);
-
+			g.drawString("Pong Game", 130, 125);
+		
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.BLUE);
