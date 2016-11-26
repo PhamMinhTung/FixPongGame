@@ -45,7 +45,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int xRandom;
 	private int yRandom;
 	private int timeDisplay;
-	private int diameterRan= 25;
+	private int diameterRan = 25;
 	private boolean showRandom;
 
 	/** Background. */
@@ -88,14 +88,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	/** Construct a PongPanel. */
 	public PongPanel() {
 		setBackground(backgroundColor);
-		//ball
+		// ball
 		imgball = new ImageIcon("Image/ball_45.png");
 		imgpanel = new ImageIcon("Image/panel.png");
 		imgpanel2 = new ImageIcon("Image/panel2.png");
 		// listen to key presses
 		setFocusable(true);
 		addKeyListener(this);
-		
+
 		timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 
 		// call step() 60 fps
@@ -121,7 +121,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				playerOneY -= paddleSpeed;
 			}
 			// Move down if after moving paddle is not outside the screen
-			if (downPressed && playerOneY + playerOneHeight + paddleSpeed < getHeight()) {
+			if (downPressed
+					&& playerOneY + playerOneHeight + paddleSpeed < getHeight()) {
 				playerOneY += paddleSpeed;
 			}
 
@@ -131,7 +132,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				playerTwoY -= paddleSpeed;
 			}
 			// Move down if after moving paddle is not outside the screen
-			if (sPressed && playerTwoY + playerTwoHeight + paddleSpeed < getHeight()) {
+			if (sPressed
+					&& playerTwoY + playerTwoHeight + paddleSpeed < getHeight()) {
 				playerTwoY += paddleSpeed;
 			}
 
@@ -164,7 +166,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// will the ball go off the left side?
 			if (nextBallLeft < playerOneRight) {
 				// is it going to miss the paddle?
-				if (nextBallTop > playerOneBottom || nextBallBottom < playerOneTop) {
+				if (nextBallTop > playerOneBottom
+						|| nextBallBottom < playerOneTop) {
 
 					playerTwoScore++;
 
@@ -185,7 +188,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// will the ball go off the right side?
 			if (nextBallRight > playerTwoLeft) {
 				// is it going to miss the paddle?
-				if (nextBallTop > playerTwoBottom || nextBallBottom < playerTwoTop) {
+				if (nextBallTop > playerTwoBottom
+						|| nextBallBottom < playerTwoTop) {
 
 					playerOneScore++;
 
@@ -207,7 +211,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// move the ball
 			ballX += ballDeltaX;
 			ballY += ballDeltaY;
-			
+
 			timeDisplay -= 1000 / 60;
 			System.out.println(timeDisplay);
 			if (timeDisplay < 0) {
@@ -218,7 +222,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				} else {
 					Point ballCenter = new Point(ballX + diameter / 2, ballY
 							+ diameter / 2);
-					Point ranCenter = new Point(xRandom+diameterRan/2, yRandom+diameterRan/2);
+					Point ranCenter = new Point(xRandom + diameterRan / 2,
+							yRandom + diameterRan / 2);
 				}
 				if (timeDisplay < -10000) {
 					showRandom = false;
@@ -251,7 +256,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setColor(Color.BLUE);
 			g.drawString("Press 'P' to play.", 130, 400);
 		} else if (playing) {
-			g.drawImage(imgpt.getImage(),0,0,500,500,null);
+			g.drawImage(imgpt.getImage(), 0, 0, 500, 500, null);
 			/* Game is playing */
 
 			// set the coordinate limit
@@ -280,10 +285,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setColor(Color.RED);
 			g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 			g.fillOval(ballX, ballY, diameter, diameter);
-			g.drawImage(imgball.getImage(),ballX, ballY, diameter, diameter,null);
+			g.drawImage(imgball.getImage(), ballX, ballY, diameter, diameter,
+					null);
 			// draw the paddles
-			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY, playerOneWidth, playerOneHeight, null);
-			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight, null);
+			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY,
+					playerOneWidth, playerOneHeight, null);
+			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY,
+					playerTwoWidth, playerTwoHeight, null);
 			if (showRandom) {
 				g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 			}
@@ -320,7 +328,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			if (e.getKeyChar() == 'p') {
 				showTitleScreen = false;
 				playing = true;
-			}else if (e.getKeyChar() == 'P'){
+			} else if (e.getKeyChar() == 'P') {
 				showTitleScreen = false;
 				playing = true;
 			}
