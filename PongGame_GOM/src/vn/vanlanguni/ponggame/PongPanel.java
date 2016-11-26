@@ -45,8 +45,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int xRandom;
 	private int yRandom;
 	private int timeDisplay;
-	private int diameterRan = 25;
+	private int diameterRan = 100;
 	private boolean showRandom;
+	private int oRandom;
+	private Timer timer;
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
@@ -100,7 +102,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 
 		// call step() 60 fps
-		Timer timer = new Timer(500 / 60, this);
+		timer = new Timer(600 / 60, this);
 		timer.start();
 	}
 
@@ -173,7 +175,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerTwoScore++;
 
 					// Player 2 Win, restart the game
-					if (playerTwoScore == 3) {
+					if (playerTwoScore == 100) {
 						playing = false;
 						gameOver = true;
 					}
@@ -195,7 +197,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerOneScore++;
 
 					// Player 1 Win, restart the game
-					if (playerOneScore == 3) {
+					if (playerOneScore == 100) {
 						playing = false;
 						gameOver = true;
 					}
@@ -218,6 +220,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			if (timeDisplay < 0) {
 				if (!showRandom) {
 					showRandom = true;
+					oRandom = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 					xRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
 					yRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
 				} else {
@@ -225,13 +228,41 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 							+ diameter / 2);
 					Point ranCenter = new Point(xRandom + diameterRan / 2,
 							yRandom + diameterRan / 2);
-					double distance2center = getPointDistance(ballCenter, ranCenter);
-							if(distance2center < (diameter/2+diameterRan/2)){
-								playerOneHeight -= 20 ;
-								showRandom = false;
-								timeDisplay = ThreadLocalRandom.current()
-										.nextInt(5, 15 + 1) * 1000;
-							}
+					double distance2center = getPointDistance(ballCenter,
+							ranCenter);
+					if (distance2center < (diameter / 2 + diameterRan / 2)) {
+						if (oRandom == 1) {
+							playerOneHeight -= 10;
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						} else if (oRandom == 2) {
+							playerOneHeight += 10;
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						} else if (oRandom == 3) {
+							diameter += 20;
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						} else if (oRandom == 4) {
+							diameter -= 5;
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						} else if (oRandom == 5) {
+					
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						} else if (oRandom == 6) {
+				
+							showRandom = false;
+							timeDisplay = ThreadLocalRandom.current().nextInt(
+									5, 15 + 1) * 1000;
+						}
+					}
 				}
 				if (timeDisplay < -10000) {
 					showRandom = false;
@@ -244,6 +275,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		// stuff has moved, tell this JPanel to repaint itself
 		repaint();
 	}
+
 	public double getPointDistance(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
 	}
@@ -262,7 +294,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.drawImage(imgdr.getImage(), 0, 0, 500, 500, null);
 			g.setColor(Color.BLUE);
 			g.drawString("Pong Game", 130, 125);
-		
+
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.BLUE);
@@ -295,8 +327,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// draw the ball
 			g.setColor(Color.RED);
-			
-			g.fillOval(ballX, ballY, diameter, diameter);
+
+			//g.fillOval(ballX, ballY, diameter, diameter);
 			g.drawImage(imgball.getImage(), ballX, ballY, diameter, diameter,
 					null);
 			// draw the paddles
@@ -305,7 +337,24 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY,
 					playerTwoWidth, playerTwoHeight, null);
 			if (showRandom) {
-				g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				if (oRandom == 1) {
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				} else if (oRandom == 2) {
+					g.setColor(Color.BLUE);
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				} else if (oRandom == 3) {
+					g.setColor(Color.ORANGE);
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				} else if (oRandom == 4) {
+					g.setColor(Color.GREEN);
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				} else if (oRandom == 5) {
+					g.setColor(Color.PINK);
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				} else if (oRandom == 6) {
+					g.setColor(Color.WHITE);
+					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+				}
 			}
 		} else if (gameOver) {
 
