@@ -224,6 +224,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 							+ diameter / 2);
 					Point ranCenter = new Point(xRandom + diameterRan / 2,
 							yRandom + diameterRan / 2);
+					double distance2center = getPointDistance(ballCenter, ranCenter);
+							if(distance2center < (diameter/2+diameterRan/2)){
+								playerOneHeight -= 20 ;
+								showRandom = false;
+								timeDisplay = ThreadLocalRandom.current()
+										.nextInt(5, 15 + 1) * 1000;
+							}
 				}
 				if (timeDisplay < -10000) {
 					showRandom = false;
@@ -235,6 +242,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 		// stuff has moved, tell this JPanel to repaint itself
 		repaint();
+	}
+	public double getPointDistance(Point p1, Point p2) {
+		return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
 	}
 
 	/** Paint the game screen. */
@@ -283,7 +293,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// draw the ball
 			g.setColor(Color.RED);
-			g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+			
 			g.fillOval(ballX, ballY, diameter, diameter);
 			g.drawImage(imgball.getImage(), ballX, ballY, diameter, diameter,
 					null);
