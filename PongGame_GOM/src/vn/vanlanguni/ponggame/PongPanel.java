@@ -20,10 +20,12 @@ package vn.vanlanguni.ponggame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -40,10 +42,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private boolean showTitleScreen = true;
 	private boolean playing;
 	private boolean gameOver;
+	private int xRandom;
+	private int yRandom;
+	private int timeDisplay;
+	private boolean showRandom;
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
-	ImageIcon imgpt = new ImageIcon("Image/background.png");
+	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -88,9 +94,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		// listen to key presses
 		setFocusable(true);
 		addKeyListener(this);
+		
+		timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 
 		// call step() 60 fps
-		Timer timer = new Timer(1000 / 60, this);
+		Timer timer = new Timer(500 / 60, this);
 		timer.start();
 	}
 
@@ -198,6 +206,25 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// move the ball
 			ballX += ballDeltaX;
 			ballY += ballDeltaY;
+			
+			timeDisplay -= 1000 / 60;
+			System.out.println(timeDisplay);
+			if (timeDisplay < 0) {
+				if (!showRandom) {
+					showRandom = true;
+					xRandom = ThreadLocalRandom.current().nextInt(50, 500 + 1);
+					yRandom = ThreadLocalRandom.current().nextInt(50, 500 + 1);
+				} else {
+					Point ballCenter = new Point(ballX + diameter / 2, ballY
+							+ diameter / 2);
+					Point ranCenter = new Point();
+				}
+				if (timeDisplay < -10000) {
+					showRandom = false;
+					timeDisplay = ThreadLocalRandom.current()
+							.nextInt(5, 15 + 1) * 1000;
+				}
+			}
 		}
 
 		// stuff has moved, tell this JPanel to repaint itself
@@ -255,8 +282,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// draw the paddles
 			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY, playerOneWidth, playerOneHeight, null);
 			g.drawImage(imgpanel2.getImage(), playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight, null);
-			//g.fillRect(playerOneX, playerOneY, playerOneWidth, playerOneHeight);
-			//g.fillRect(playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight);
+			if (showRandom) {
+				g.fillOval(xRandom, yRandom, 30, 30);
+			}
 		} else if (gameOver) {
 
 			/* Show End game screen with winner name and score */
