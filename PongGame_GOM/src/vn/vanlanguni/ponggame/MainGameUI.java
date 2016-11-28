@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  *
  */
 public class MainGameUI extends JFrame{
-	private static final int _HEIGHT = 500;
+	private static final int _HEIGHT = 550;
 	private static final int _WIDTH = 500;
 	private PongPanel pongPanel;
 	
@@ -34,7 +34,7 @@ public class MainGameUI extends JFrame{
 	JTextField txtPlayer1 = new JTextField();
 	JTextField txtPlayer2 = new JTextField();
 	
-	JButton btnB = new JButton(" Đồng ý ");
+	JButton btnB = new JButton(" Accept ");
 	int x = 10, y = 20, w = 100, h = 30;  
 	
 	public MainGameUI(){
