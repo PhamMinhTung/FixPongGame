@@ -37,6 +37,9 @@ import javax.swing.Timer;
  *
  */
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
+	String namePlayer1;
+	String namePlayer2;
+	
 	private static final long serialVersionUID = -1097341635155021546L;
 
 	private boolean showTitleScreen = true;
@@ -47,7 +50,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int timeDisplay;
 	private int diameterRan = 100;
 	private boolean showRandom;
-	private int oRandom;
+	private int oRandom ;
 	private Timer timer;
 
 	/** Background. */
@@ -252,12 +255,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
 						} else if (oRandom == 5) {
-					
+							timer = new Timer(300 / 60, this);
+							paddleSpeed = 5;
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
 						} else if (oRandom == 6) {
-				
+							timer = new Timer(1000 / 60, this);
+							paddleSpeed = 5;
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
@@ -322,8 +327,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100); // Player 1
 																	// score
+			g.drawString(namePlayer1, 50, 50);
 			g.drawString(String.valueOf(playerTwoScore), 400, 100); // Player 2
 																	// score
+			g.drawString(namePlayer2, 350, 50);
 
 			// draw the ball
 			g.setColor(Color.RED);
@@ -369,9 +376,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// Draw the winner name
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			if (playerOneScore > playerTwoScore) {
-				g.drawString("Player 1 Wins!", 165, 200);
+				g.setColor(Color.WHITE);
+				g.drawString(namePlayer1, 150, 200);
+				//g.drawString("Player 1 Wins!", 165, 200);
 			} else {
-				g.drawString("Player 2 Wins!", 165, 200);
+				g.setColor(Color.WHITE);
+				g.drawString(namePlayer2, 150, 200);
+				//g.drawString("Player 2 Wins!", 165, 200);
 			}
 
 			// Draw Restart message
