@@ -178,7 +178,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerTwoScore++;
 
 					// Player 2 Win, restart the game
-					if (playerTwoScore == 100) {
+					if (playerTwoScore == 3) {
 						playing = false;
 						gameOver = true;
 					}
@@ -200,7 +200,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerOneScore++;
 
 					// Player 1 Win, restart the game
-					if (playerOneScore == 100) {
+					if (playerOneScore == 3) {
 						playing = false;
 						gameOver = true;
 					}
@@ -377,11 +377,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			if (playerOneScore > playerTwoScore) {
 				g.setColor(Color.WHITE);
-				g.drawString(namePlayer1, 150, 200);
+				g.drawString(namePlayer1 + " is the Winner" , 150, 200);
 				//g.drawString("Player 1 Wins!", 165, 200);
 			} else {
 				g.setColor(Color.WHITE);
-				g.drawString(namePlayer2, 150, 200);
+				g.drawString(namePlayer2 + " is the Winner", 150, 200);
 				//g.drawString("Player 2 Wins!", 165, 200);
 			}
 
