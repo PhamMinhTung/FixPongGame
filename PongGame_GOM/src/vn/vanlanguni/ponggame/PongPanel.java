@@ -57,6 +57,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private Color backgroundColor = Color.BLACK;
 	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
 	ImageIcon imgdr = new ImageIcon("Image/welcome.jpg");
+	ImageIcon imgdri = new ImageIcon("Image/gameover.jpg");
+
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -377,18 +379,22 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			if (playerOneScore > playerTwoScore) {
 				g.setColor(Color.WHITE);
-				g.drawString(namePlayer1 + " is the Winner" , 150, 200);
+				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
+
+				g.drawString(namePlayer1 + " is the Winner" , 50, 300);
 				//g.drawString("Player 1 Wins!", 165, 200);
 			} else {
-				g.setColor(Color.WHITE);
-				g.drawString(namePlayer2 + " is the Winner", 150, 200);
+				g.setColor(Color.RED);
+				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
+
+				g.drawString(namePlayer2 + " is the Winner", 50, 100);
 				//g.drawString("Player 2 Wins!", 165, 200);
 			}
 
 			// Draw Restart message
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 18));
 			// TODO Draw a restart message
-			g.drawString("Press 'Spacebar' to Restart", 130, 300);
+			g.drawString("Press 'Spacebar' to Restart", 130, 400);
 		}
 	}
 
