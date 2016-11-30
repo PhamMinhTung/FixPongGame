@@ -381,13 +381,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				g.setColor(Color.WHITE);
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
-				g.drawString(namePlayer1 + " is the Winner" , 50, 300);
+				g.drawString(namePlayer1 + " is the Winner" , 120, 100);
 				//g.drawString("Player 1 Wins!", 165, 200);
 			} else {
 				g.setColor(Color.RED);
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
-				g.drawString(namePlayer2 + " is the Winner", 50, 100);
+				g.drawString(namePlayer2 + " is the Winner", 120, 100);
 				//g.drawString("Player 2 Wins!", 165, 200);
 			}
 
