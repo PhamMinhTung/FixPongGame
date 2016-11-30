@@ -320,7 +320,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			//
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.BLUE);
-			g.drawString("Press 'N' to play.", 130, 250);
+			g.drawString("Press 'N' to set Name.", 130, 250);
 		} else if (playing) {
 			g.drawImage(imgpt.getImage(), 0, 0, 500, 500, null);
 			/* Game is playing */
@@ -419,9 +419,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	public void keyPressed(KeyEvent e) {
 		if (showTitleScreen) {
 			if (e.getKeyChar() == 'p') {
+				Sound.play("Sound/Draven.wav");
 				showTitleScreen = false;
 				playing = true;
 			} else if (e.getKeyChar() == 'P') {
+				Sound.play("Sound/Draven.wav");
 				showTitleScreen = false;
 				playing = true;
 			}
