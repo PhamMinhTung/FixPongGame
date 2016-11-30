@@ -54,7 +54,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 
 	/** Background. */
-	private Color backgroundColor = Color.BLACK;
 	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
 	ImageIcon imgdr = new ImageIcon("Image/welcome.jpg");
 	ImageIcon imgdri = new ImageIcon("Image/gameover.jpg");
@@ -95,7 +94,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	/** Construct a PongPanel. */
 	public PongPanel() {
-		setBackground(backgroundColor);
 		// ball
 		imgball = new ImageIcon("Image/ball_45.png");
 		imgpanel = new ImageIcon("Image/panel.png");
