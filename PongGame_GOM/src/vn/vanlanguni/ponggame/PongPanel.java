@@ -60,9 +60,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	private Timer timer;
 
 	/** Background. */
-	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
-	ImageIcon imgdr = new ImageIcon("Image/welcome.jpg");
+	ImageIcon imgpt = new ImageIcon("Image/campo.jpg");
+	ImageIcon imgdr = new ImageIcon("Image/Welcome1.jpg");
 	ImageIcon imgdri = new ImageIcon("Image/gameover.jpg");
+	
 
 	/** State on the control keys. */
 	private boolean upPressed;
@@ -310,17 +311,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			// Draw game title and start message
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawImage(imgdr.getImage(), 0, 0, 500, 500, null);
-			g.setColor(Color.BLUE);
+			g.setColor(Color.RED);
 			g.drawString("Pong Game", 130, 125);
 
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
-			g.setColor(Color.BLUE);
-			g.drawString("Press 'P' to play.", 130, 400);
+			g.setColor(Color.RED);
+			g.drawString("Press 'P' to Play", 130, 400);
 			//
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
-			g.setColor(Color.BLUE);
-			g.drawString("Press 'N' to set Name.", 130, 250);
+			g.setColor(Color.RED);
+			g.drawString("Press 'N' to set Name", 100, 250);
 		} else if (playing) {
 			g.drawImage(imgpt.getImage(), 0, 0, 500, 500, null);
 			/* Game is playing */
@@ -340,7 +341,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			g.drawLine(playerTwoLeft, 0, playerTwoLeft, getHeight());
 
 			// draw the scores
-			g.setColor(Color.BLUE);
+			g.setColor(Color.RED);
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100); // Player 1
 																	// score
@@ -393,7 +394,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			// Draw the winner name
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			if (playerOneScore > playerTwoScore) {
-				g.setColor(Color.WHITE);
+				g.setColor(Color.RED);	
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
 				g.drawString(namePlayer1 + " is the Winner", 120, 100);
