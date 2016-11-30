@@ -21,25 +21,31 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import vn.vanlanguni.ponggame.Sound;
+
 /**
  * 
  * @author Invisible Man
  *
  */
-public class PongPanel extends JPanel implements ActionListener, KeyListener {
-	String namePlayer1;
-	String namePlayer2;
-	
+public class PongPanel extends JPanel implements ActionListener, KeyListener,
+		MouseListener, MouseMotionListener {
+	static String namePlayer1 = "", namePlayer2 = "";
+
 	private static final long serialVersionUID = -1097341635155021546L;
 
 	private boolean showTitleScreen = true;
@@ -50,7 +56,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int timeDisplay;
 	private int diameterRan = 100;
 	private boolean showRandom;
-	private int oRandom ;
+	private int oRandom;
 	private Timer timer;
 
 	/** Background. */
@@ -91,6 +97,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	/** Player score, show on upper left and right. */
 	private int playerOneScore;
 	private int playerTwoScore;
+	//
+	Rectangle rctBall = new Rectangle(360, 5, 100, 30);
 
 	/** Construct a PongPanel. */
 	public PongPanel() {
@@ -183,7 +191,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					if (playerTwoScore == 3) {
 						playing = false;
 						gameOver = true;
-						Sound.play("Sound/Randomize14.wav");
 					}
 					ballX = 200;
 					ballY = 200;
@@ -208,7 +215,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					if (playerOneScore == 3) {
 						playing = false;
 						gameOver = true;
-						Sound.play("Sound/Randomize14.wav");
 					}
 					ballX = 200;
 					ballY = 200;
@@ -311,6 +317,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.BLUE);
 			g.drawString("Press 'P' to play.", 130, 400);
+			//
+			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
+			g.setColor(Color.BLUE);
+			g.drawString("Press 'N' to play.", 130, 250);
 		} else if (playing) {
 			g.drawImage(imgpt.getImage(), 0, 0, 500, 500, null);
 			/* Game is playing */
@@ -342,7 +352,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// draw the ball
 			g.setColor(Color.RED);
 
-			//g.fillOval(ballX, ballY, diameter, diameter);
+			// g.fillOval(ballX, ballY, diameter, diameter);
 			g.drawImage(imgball.getImage(), ballX, ballY, diameter, diameter,
 					null);
 			// draw the paddles
@@ -386,14 +396,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				g.setColor(Color.WHITE);
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
-				g.drawString(namePlayer1 + " is the Winner" , 120, 100);
-				//g.drawString("Player 1 Wins!", 165, 200);
+				g.drawString(namePlayer1 + " is the Winner", 120, 100);
+				// g.drawString("Player 1 Wins!", 165, 200);
 			} else {
 				g.setColor(Color.RED);
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
 				g.drawString(namePlayer2 + " is the Winner", 120, 100);
-				//g.drawString("Player 2 Wins!", 165, 200);
+				// g.drawString("Player 2 Wins!", 165, 200);
 			}
 
 			// Draw Restart message
@@ -414,6 +424,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			} else if (e.getKeyChar() == 'P') {
 				showTitleScreen = false;
 				playing = true;
+			}
+			if (e.getKeyCode() == KeyEvent.VK_N) { // nhan phim N De set
+				// NamePlayer
+				PlayerAndBall f = new PlayerAndBall();
+				f.setVisible(true);
 			}
 		} else if (playing) {
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -447,6 +462,50 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_S) {
 			downPressed = false;
 		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (rctBall.contains(e.getX(), e.getY())) {
+			PlayerAndBall f = new PlayerAndBall();
+			f.setVisible(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
