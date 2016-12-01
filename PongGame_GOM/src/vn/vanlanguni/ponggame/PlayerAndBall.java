@@ -30,15 +30,16 @@ public class PlayerAndBall extends JDialog {
 			"Selected ball in game"), lblinball = new JLabel();
 	JTextField txtPlayer1 = new JTextField();
 	JTextField txtPlayer2 = new JTextField();
-	private JRadioButton optball1, optball2, optball3, optback1,optback2,optback3;
+	private JRadioButton optball1, optball2, optball3, optback1, optback2,
+			optback3;
 	private ImageIcon imgball1;
 	private ImageIcon imgball2;
 	private ImageIcon imgball3;
 	private ImageIcon imgback1;
 	private ImageIcon imgback2;
 	private ImageIcon imgback3;
-	private ButtonGroup btgSelect1,btgSelect2;
-	private JPanel panbox1,panbox2;
+	private ButtonGroup btgSelect1, btgSelect2;
+	private JPanel panbox1, panbox2;
 	JButton btnB = new JButton(" Accept ");
 	int x = 10, y = 20, w = 100, h = 30;
 
@@ -78,9 +79,9 @@ public class PlayerAndBall extends JDialog {
 		imgball1 = new ImageIcon("Image/ball_45.png");
 		imgball2 = new ImageIcon("Image/gai.png");
 		imgball3 = new ImageIcon("Image/kirby.png");
-//		imgback1 = new ImageIcon("Image/ball_45.png");
-//		imgback2 = new ImageIcon("Image/ball_45.png");
-//		imgback3 = new ImageIcon("Image/ball_45.png");
+		imgback1 = new ImageIcon("Image/avenger.png");
+		imgback2 = new ImageIcon("Image/anhre.png");
+		imgback3 = new ImageIcon("Image/bk2.png");
 		txtPlayer1.setText(PongPanel.namePlayer1);
 		txtPlayer2.setText(PongPanel.namePlayer2);
 		// ..
@@ -127,9 +128,9 @@ public class PlayerAndBall extends JDialog {
 		panbox1.add(optball3, BorderLayout.EAST);
 		panbox1.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 		panbox1.setSize(210, 30);
-		panbox1.setLocation(110, 230);
+		panbox1.setLocation(90, 230);
 		btnB.setBounds(x + 140, y + 400, w, h);
-		
+
 		this.add(panbox2);
 		// Location selected ball
 		panbox2.add(optback1, BorderLayout.WEST);
@@ -155,6 +156,13 @@ public class PlayerAndBall extends JDialog {
 				} else if (optball3.isSelected() == true) {
 					PongPanel.NumTypeBall = 2;
 				}
+				if (optback1.isSelected() == true) {
+					PongPanel.NumTypeBall01 = 0;
+				} else if (optback2.isSelected() == true) {
+					PongPanel.NumTypeBall01 = 1;
+				} else if (optback3.isSelected() == true) {
+					PongPanel.NumTypeBall01 = 2;
+				}
 				panbox1.setVisible(false);
 				lblPlayer1.setVisible(false);
 				lblPlayer2.setVisible(false);
@@ -164,7 +172,7 @@ public class PlayerAndBall extends JDialog {
 				PongPanel.namePlayer1 = txtPlayer1.getText();
 				PongPanel.namePlayer2 = txtPlayer2.getText();
 				dispose();
-				// }
+				
 			}
 		});
 	}
