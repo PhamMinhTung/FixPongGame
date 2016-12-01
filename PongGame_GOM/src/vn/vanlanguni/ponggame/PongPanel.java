@@ -240,6 +240,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 						|| nextBallBottom < playerOneTop) {
 
 					playerTwoScore++;
+					playerOneHeight = 50;
+					playerTwoHeight = 50;
+					diameter = 25;
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 2 Win, restart the game
@@ -265,6 +268,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 						|| nextBallBottom < playerTwoTop) {
 
 					playerOneScore++;
+					playerOneHeight = 50;
+					playerTwoHeight = 50;
+					diameter = 25;
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 1 Win, restart the game
