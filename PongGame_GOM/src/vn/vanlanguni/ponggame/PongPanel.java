@@ -227,7 +227,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 			// ball bounces off top and bottom of screen
 			if (nextBallTop < 0 || nextBallBottom > getHeight()) {
 				ballDeltaY *= -1;
-				Sound.play("Sound/SoundWel.wav");
+				Sound.play("Sound/pong.wav");
 			}
 
 			// will the ball go off the left side?
@@ -252,7 +252,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					// If the ball hitting the paddle, it will bounce back
 					// FIXME Something wrong here
 					ballDeltaX *= -1;
-					Sound.play("Sound/SoundWel.wav");
+					Sound.play("Sound/pong.wav");
 					side = 1;
 				}
 			}
@@ -280,7 +280,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					// If the ball hitting the paddle, it will bounce back
 					// FIXME Something wrong here
 					ballDeltaX *= -1;
-					Sound.play("Sound/SoundWel.wav");
+					Sound.play("Sound/pong.wav");
 					side = 2;
 				}
 			}
@@ -498,14 +498,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 	public void keyPressed(KeyEvent e) {
 		if (showTitleScreen) {
 			if (e.getKeyChar() == 'p') {
+				Sound.play("Sound/start.wav");
 				showTitleScreen = false;
 				playing = true;
 			} else if (e.getKeyChar() == 'P') {
+				Sound.play("Sound/start.wav");
 				showTitleScreen = false;
 				playing = true;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // nhan phim Esc De set
 				// NamePlayer
+				Sound.play("Sound/open.wav");
 				PlayerAndBall f = new PlayerAndBall();
 				f.setVisible(true);
 			}
@@ -520,6 +523,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 				downPressed = true;
 			}
 		} else if (gameOver && e.getKeyCode() == KeyEvent.VK_SPACE) {
+			Sound.play("Sound/return.wav");
 			timer.start();
 			gameOver = false;
 			showTitleScreen = true;
