@@ -136,10 +136,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		imgpanel = new ImageIcon("Image/panel.png");
 		imgpanel2 = new ImageIcon("Image/panel2.png");
 		imgsup01 = new ImageIcon("Image/tru.png");
-		imgsup02 = new ImageIcon("Image/cong.png");
-		imgsup03 = new ImageIcon("Image/25cam.png");
-		imgsup04 = new ImageIcon("Image/25xanh.png");
-		imgsup05 = new ImageIcon("Image/25xanh.png");
+		imgsup02 = new ImageIcon("Image/cong-01.png");
+		imgsup03 = new ImageIcon("Image/camcam-01.png");
+		imgsup04 = new ImageIcon("Image/xanh-01.png");
+		imgsup05 = new ImageIcon("Image/giamgiam-01.png");
 		// add
 		panbox = new JPanel();
 		panbox.setLayout(new BorderLayout(14, 10));
@@ -246,7 +246,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 2 Win, restart the game
-					if (playerTwoScore == 3) {
+					if (playerTwoScore == 99) {
 						playing = false;
 						gameOver = true;
 					}
@@ -274,7 +274,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 1 Win, restart the game
-					if (playerOneScore == 3) {
+					if (playerOneScore == 99) {
 						playing = false;
 						gameOver = true;
 					}
