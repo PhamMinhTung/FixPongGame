@@ -58,7 +58,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	private int xRandom;
 	private int yRandom;
 	private int timeDisplay;
-	private int diameterRan = 300;
+	private int diameterRan = 50;
 	private JRadioButton optball1, optball2, optball3;
 	private ImageIcon imgball1;
 	private ImageIcon imgball2;
@@ -66,6 +66,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	private ImageIcon imgback1;
 	private ImageIcon imgback2;
 	private ImageIcon imgback3;
+	private ImageIcon imgsup01;
+	private ImageIcon imgsup02;
+	private ImageIcon imgsup03;
+	private ImageIcon imgsup04;
 	private ButtonGroup btgSelect;
 	private JPanel panbox;
 	private boolean showRandom;
@@ -125,10 +129,15 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 
 	/** Construct a PongPanel. */
 	public PongPanel() {
+		Sound.play("Sound/Draven.wav");
 		// ball
 		imgball = new ImageIcon("Image/ball_45.png");
 		imgpanel = new ImageIcon("Image/panel.png");
 		imgpanel2 = new ImageIcon("Image/panel2.png");
+		imgsup01 = new ImageIcon("Image/tru.png");
+		imgsup02 = new ImageIcon("Image/tang.png");
+		imgsup03 = new ImageIcon("Image/25cam.png");
+		imgsup04 = new ImageIcon("Image/25xanh.png");
 		// add
 		panbox = new JPanel();
 		panbox.setLayout(new BorderLayout(14, 10));
@@ -144,7 +153,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		imgball2 = new ImageIcon("Image/gai.png");
 		imgball3 = new ImageIcon("Image/kirby.png");
 		imgback1 = new ImageIcon("Image/avenger.png");
-		imgback2 = new ImageIcon("Image/anhre.png");
+		imgback2 = new ImageIcon("Image/campo.jpg");
 		imgback3 = new ImageIcon("Image/bk2.png");
 		// listen to key presses
 		setFocusable(true);
@@ -364,7 +373,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		super.paintComponent(g);
 
 		if (showTitleScreen) {
-
 			/* Show welcome screen */
 			this.add(panbox);
 			panbox.setVisible(false);
@@ -381,7 +389,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			g.drawImage(imgdr.getImage(), 0, 0, 500, 500, null);
 			g.setColor(Color.RED);
 			g.drawString("Pong Game", 130, 125);
-
+			
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.RED);
@@ -390,6 +398,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.RED);
 			g.drawString("Press 'N' to set.", 130, 440);
+			
 		} else if (playing) {
 			int WIDTH = 500;
 			int HEIGHT= 540;
@@ -450,16 +459,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					playerTwoWidth, playerTwoHeight, null);
 			if (showRandom) {
 				if (oRandom == 1) {
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+					g.drawImage(imgsup01.getImage(), xRandom, yRandom,
+							diameterRan, diameterRan, null);
 				} else if (oRandom == 2) {
-					g.setColor(Color.BLUE);
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+					g.drawImage(imgsup02.getImage(), xRandom, yRandom,
+							diameterRan, diameterRan, null);
 				} else if (oRandom == 3) {
-					g.setColor(Color.ORANGE);
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+					g.drawImage(imgsup03.getImage(), xRandom, yRandom,
+							diameterRan, diameterRan, null);
 				} else if (oRandom == 4) {
-					g.setColor(Color.GREEN);
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+					g.drawImage(imgsup04.getImage(), xRandom, yRandom,
+							diameterRan, diameterRan, null);
 				} else if (oRandom == 5) {
 					g.setColor(Color.WHITE);
 					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
@@ -506,11 +516,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			if (e.getKeyChar() == 'p') {
 				showTitleScreen = false;
 				playing = true;
-				Sound.play("Sound/Draven.wav");
 			} else if (e.getKeyChar() == 'P') {
 				showTitleScreen = false;
 				playing = true;
-				Sound.play("Sound/Draven.wav");
 			}
 			if (e.getKeyCode() == KeyEvent.VK_N) { // nhan phim N De set
 				// NamePlayer
@@ -528,6 +536,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 				downPressed = true;
 			}
 		} else if (gameOver && e.getKeyCode() == KeyEvent.VK_SPACE) {
+			Sound.play("Sound/Randomize14.wav");
 			gameOver = false;
 			showTitleScreen = true;
 			playerOneY = 250;
