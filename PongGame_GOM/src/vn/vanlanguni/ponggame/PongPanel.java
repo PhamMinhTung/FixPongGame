@@ -17,6 +17,7 @@
  */
 package vn.vanlanguni.ponggame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -31,8 +32,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.Timer;
 
 import vn.vanlanguni.ponggame.Sound;
@@ -54,16 +58,24 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	private int xRandom;
 	private int yRandom;
 	private int timeDisplay;
-	private int diameterRan = 100;
+	private int diameterRan = 300;
+	private JRadioButton optball1, optball2, optball3;
+	private ImageIcon imgball1;
+	private ImageIcon imgball2;
+	private ImageIcon imgball3;
+	private ButtonGroup btgSelect;
+	private JPanel panbox;
 	private boolean showRandom;
-	private int oRandom;
+	private int oRandom = 2;
 	private Timer timer;
+	private int time = 600 / 60;
+	private int cooldown = 3;
+	private int side;
 
 	/** Background. */
-	ImageIcon imgpt = new ImageIcon("Image/campo.jpg");
+	ImageIcon imgpt = new ImageIcon("Image/avenger.png");
 	ImageIcon imgdr = new ImageIcon("Image/Welcome1.jpg");
 	ImageIcon imgdri = new ImageIcon("Image/gameover.jpg");
-	
 
 	/** State on the control keys. */
 	private boolean upPressed;
@@ -74,12 +86,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	/** The ball: position, diameter */
 	private int ballX = 250;
 	private int ballY = 250;
-	private int diameter = 20;
+	private int diameter = 25;
 	private int ballDeltaX = -1;
 	private int ballDeltaY = 3;
 	ImageIcon imgball;
 	ImageIcon imgpanel;
 	ImageIcon imgpanel2;
+
 	/** Player 1's paddle: position and size */
 	private int playerOneX = 0;
 	private int playerOneY = 250;
@@ -98,8 +111,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	/** Player score, show on upper left and right. */
 	private int playerOneScore;
 	private int playerTwoScore;
-	//
+	// declare Rectangle is Button
 	Rectangle rctBall = new Rectangle(360, 5, 100, 30);
+	// declare NumTypeball
+	static int NumTypeBall = 0;
+	static boolean rectinBall = false;
 
 	/** Construct a PongPanel. */
 	public PongPanel() {
@@ -107,14 +123,32 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		imgball = new ImageIcon("Image/ball_45.png");
 		imgpanel = new ImageIcon("Image/panel.png");
 		imgpanel2 = new ImageIcon("Image/panel2.png");
+		// add
+		panbox = new JPanel();
+		panbox.setLayout(new BorderLayout(14, 10));
+		optball1 = new JRadioButton("Ball 1");
+		optball2 = new JRadioButton("Ball 2");
+		optball3 = new JRadioButton("Ball 3");
+		btgSelect = new ButtonGroup();
+		btgSelect.add(optball1);
+		btgSelect.add(optball2);
+		btgSelect.add(optball3);
+		optball1.setSelected(true);
+		imgball1 = new ImageIcon("Image/ball_45.png");
+		imgball2 = new ImageIcon("Image/gai.png");
+		imgball3 = new ImageIcon("Image/kirby.png");
 		// listen to key presses
 		setFocusable(true);
 		addKeyListener(this);
 
 		timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 
+		timer();
+	}
+
+	public void timer() {
 		// call step() 60 fps
-		timer = new Timer(600 / 60, this);
+		timer = new Timer(time, this);
 		timer.start();
 	}
 
@@ -200,6 +234,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					// FIXME Something wrong here
 					ballDeltaX *= -1;
 					Sound.play("Sound/SoundWel.wav");
+					side = 1;
 				}
 			}
 
@@ -225,6 +260,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					// FIXME Something wrong here
 					ballDeltaX *= -1;
 					Sound.play("Sound/SoundWel.wav");
+					side = 2;
 				}
 			}
 
@@ -233,11 +269,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			ballY += ballDeltaY;
 
 			timeDisplay -= 1000 / 60;
-			System.out.println(timeDisplay);
+			// System.out.println(timeDisplay);
 			if (timeDisplay < 0) {
 				if (!showRandom) {
 					showRandom = true;
-					oRandom = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+					// oRandom = ThreadLocalRandom.current().nextInt(1, 5 + 1);
 					xRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
 					yRandom = ThreadLocalRandom.current().nextInt(50, 450 + 1);
 				} else {
@@ -249,34 +285,51 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 							ranCenter);
 					if (distance2center < (diameter / 2 + diameterRan / 2)) {
 						if (oRandom == 1) {
-							playerOneHeight -= 10;
+							if (side == 1) {
+								playerOneHeight -= 10;
+							} else if (side == 2) {
+								playerTwoHeight -= 10;
+							}
+							cooldown -= 1;
+							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
 						} else if (oRandom == 2) {
-							playerOneHeight += 10;
+							if (side == 1) {
+								playerOneHeight += 10;
+							} else if (side == 2) {
+								playerTwoHeight += 10;
+							}
+							cooldown -= 1;
+							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
 						} else if (oRandom == 3) {
-							diameter += 20;
+							diameter += 10;
+							cooldown -= 1;
+							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
+							if (cooldown == 0) {
+								diameter += 0;
+							}
 						} else if (oRandom == 4) {
-							diameter -= 5;
+							diameter -= 10;
+							cooldown -= 1;
+							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
+							if (cooldown == 0) {
+								diameter -= 0;
+							}
 						} else if (oRandom == 5) {
-							timer = new Timer(300 / 60, this);
-							paddleSpeed = 5;
-							showRandom = false;
-							timeDisplay = ThreadLocalRandom.current().nextInt(
-									5, 15 + 1) * 1000;
-						} else if (oRandom == 6) {
-							timer = new Timer(1000 / 60, this);
-							paddleSpeed = 5;
+							time -= 100 / 60;
+							timer();
+							paddleSpeed = 3;
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(
 									5, 15 + 1) * 1000;
@@ -307,7 +360,16 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		if (showTitleScreen) {
 
 			/* Show welcome screen */
-
+			this.add(panbox);
+			panbox.setVisible(false);
+			// Location selected ball
+			panbox.add(optball1, BorderLayout.WEST);
+			panbox.add(optball2, BorderLayout.CENTER);
+			panbox.add(optball3, BorderLayout.EAST);
+			panbox.setBorder(BorderFactory
+					.createLineBorder(Color.LIGHT_GRAY, 2));
+			panbox.setSize(210, 30);
+			panbox.setLocation(110, 230);
 			// Draw game title and start message
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawImage(imgdr.getImage(), 0, 0, 500, 500, null);
@@ -317,15 +379,15 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.RED);
-			g.drawString("Press 'P' to Play", 130, 400);
+			g.drawString("Press 'P' to play.", 130, 400);
 			//
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 27));
 			g.setColor(Color.RED);
-			g.drawString("Press 'N' to set Name", 100, 250);
+			g.drawString("Press 'N' to set.", 130, 440);
 		} else if (playing) {
 			g.drawImage(imgpt.getImage(), 0, 0, 500, 500, null);
 			/* Game is playing */
-
+			panbox.setVisible(false);
 			// set the coordinate limit
 			int playerOneRight = playerOneX + playerOneWidth;
 			int playerTwoLeft = playerTwoX;
@@ -341,7 +403,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			g.drawLine(playerTwoLeft, 0, playerTwoLeft, getHeight());
 
 			// draw the scores
-			g.setColor(Color.RED);
+			g.setColor(Color.BLUE);
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100); // Player 1
 																	// score
@@ -354,8 +416,16 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			g.setColor(Color.RED);
 
 			// g.fillOval(ballX, ballY, diameter, diameter);
-			g.drawImage(imgball.getImage(), ballX, ballY, diameter, diameter,
-					null);
+			if (NumTypeBall == 0) {
+				g.drawImage(imgball1.getImage(), ballX, ballY, diameter,
+						diameter, null);
+			} else if (NumTypeBall == 1) {
+				g.drawImage(imgball2.getImage(), ballX, ballY, diameter,
+						diameter, null);
+			} else if (NumTypeBall == 2) {
+				g.drawImage(imgball3.getImage(), ballX, ballY, diameter,
+						diameter, null);
+			}
 			// draw the paddles
 			g.drawImage(imgpanel.getImage(), playerOneX, playerOneY,
 					playerOneWidth, playerOneHeight, null);
@@ -374,9 +444,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					g.setColor(Color.GREEN);
 					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 				} else if (oRandom == 5) {
-					g.setColor(Color.PINK);
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
-				} else if (oRandom == 6) {
 					g.setColor(Color.WHITE);
 					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
 				}
@@ -394,7 +461,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 			// Draw the winner name
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			if (playerOneScore > playerTwoScore) {
-				g.setColor(Color.RED);	
+				g.setColor(Color.WHITE);
 				g.drawImage(imgdri.getImage(), 0, 0, 500, 500, null);
 
 				g.drawString(namePlayer1 + " is the Winner", 120, 100);
@@ -420,13 +487,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	public void keyPressed(KeyEvent e) {
 		if (showTitleScreen) {
 			if (e.getKeyChar() == 'p') {
-				Sound.play("Sound/Draven.wav");
 				showTitleScreen = false;
 				playing = true;
+				Sound.play("Sound/Draven.wav");
 			} else if (e.getKeyChar() == 'P') {
-				Sound.play("Sound/Draven.wav");
 				showTitleScreen = false;
 				playing = true;
+				Sound.play("Sound/Draven.wav");
 			}
 			if (e.getKeyCode() == KeyEvent.VK_N) { // nhan phim N De set
 				// NamePlayer

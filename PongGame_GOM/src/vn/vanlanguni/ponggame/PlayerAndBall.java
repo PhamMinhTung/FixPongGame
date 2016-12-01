@@ -27,7 +27,7 @@ public class PlayerAndBall extends JDialog {
 	JLabel lblPonggame = new JLabel("Pong Game");
 	JLabel lblPlayer1 = new JLabel("Player 1");
 	JLabel lblPlayer2 = new JLabel("Player 2"), lblBall = new JLabel(
-			"Selected ball in game");
+			"Selected ball in game"), lblinball = new JLabel();
 	JTextField txtPlayer1 = new JTextField();
 	JTextField txtPlayer2 = new JTextField();
 	private JRadioButton optball1, optball2, optball3;
@@ -46,6 +46,9 @@ public class PlayerAndBall extends JDialog {
 		setLocationRelativeTo(null);
 		// add
 		panbox = new JPanel();
+		add(lblinball);
+		lblinball.setSize(90, 90);
+		lblinball.setLocation(150, 265);
 		panbox.setLayout(new BorderLayout(14, 10));
 		optball1 = new JRadioButton("Ball 1");
 		optball2 = new JRadioButton("Ball 2");
@@ -60,13 +63,30 @@ public class PlayerAndBall extends JDialog {
 		btgSelect.add(optball3);
 		optball1.setSelected(true);
 		imgball1 = new ImageIcon("Image/ball_45.png");
-		imgball2 = new ImageIcon("Image/ball_5.png");
-		imgball3 = new ImageIcon("Image/ball_123.png");
+		imgball2 = new ImageIcon("Image/gai.png");
+		imgball3 = new ImageIcon("Image/kirby.png");
 		txtPlayer1.setText(PongPanel.namePlayer1);
 		txtPlayer2.setText(PongPanel.namePlayer2);
 		// ..
 		SaveNamePlayer();
 		Act();
+		ActionListener action = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (optball1.isSelected()) {
+					lblinball.setIcon(imgball1);
+				} else if (optball2.isSelected()) {
+					lblinball.setIcon(imgball2);
+				} else if (optball3.isSelected()) {
+					lblinball.setIcon(imgball3);
+				}
+			}
+		};
+		optball1.addActionListener(action);
+		optball2.addActionListener(action);
+		optball3.addActionListener(action);
 	}
 
 	public void SaveNamePlayer() {
@@ -95,25 +115,32 @@ public class PlayerAndBall extends JDialog {
 	}
 
 	public void Act() {
-		ActionListener act = new ActionListener() {
+		btnB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (e.getSource() == btnB) {
-					// pongPanel.setVisible(true);
-					lblPlayer1.setVisible(false);
-					lblPlayer2.setVisible(false);
-					txtPlayer1.setVisible(false);
-					txtPlayer2.setVisible(false);
-					btnB.setVisible(false);
-					PongPanel.namePlayer1 = txtPlayer1.getText();
-					PongPanel.namePlayer2 = txtPlayer2.getText();
-					dispose();
+				// if (e.getSource() == btnB) {
+				// pongPanel.setVisible(true);
+				if (optball1.isSelected() == true) {
+					PongPanel.NumTypeBall = 0;
+				} else if (optball2.isSelected() == true) {
+					PongPanel.NumTypeBall = 1;
+				} else if (optball3.isSelected() == true) {
+					PongPanel.NumTypeBall = 2;
 				}
+				panbox.setVisible(false);
+				lblPlayer1.setVisible(false);
+				lblPlayer2.setVisible(false);
+				txtPlayer1.setVisible(false);
+				txtPlayer2.setVisible(false);
+				btnB.setVisible(false);
+				PongPanel.namePlayer1 = txtPlayer1.getText();
+				PongPanel.namePlayer2 = txtPlayer2.getText();
+				dispose();
+				// }
 			}
-		};
-		btnB.addActionListener(act);
+		});
 	}
 
 	/**
