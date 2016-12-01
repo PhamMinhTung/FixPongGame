@@ -132,8 +132,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 		Sound.play("Sound/Draven.wav");
 		// ball
 		imgball = new ImageIcon("Image/ball_45.png");
-		imgpanel = new ImageIcon("Image/panel.png");
-		imgpanel2 = new ImageIcon("Image/panel2.png");
+		imgpanel = new ImageIcon("Image/paddle1.gif");
+		imgpanel2 = new ImageIcon("Image/paddle2.gif");
 		imgsup01 = new ImageIcon("Image/tru.png");
 		imgsup02 = new ImageIcon("Image/cong-01.png");
 		imgsup03 = new ImageIcon("Image/camcam-01.png");
