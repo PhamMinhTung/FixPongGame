@@ -30,41 +30,57 @@ public class PlayerAndBall extends JDialog {
 			"Selected ball in game"), lblinball = new JLabel();
 	JTextField txtPlayer1 = new JTextField();
 	JTextField txtPlayer2 = new JTextField();
-	private JRadioButton optball1, optball2, optball3;
+	private JRadioButton optball1, optball2, optball3, optback1,optback2,optback3;
 	private ImageIcon imgball1;
 	private ImageIcon imgball2;
 	private ImageIcon imgball3;
-	private ButtonGroup btgSelect;
-	private JPanel panbox;
+	private ImageIcon imgback1;
+	private ImageIcon imgback2;
+	private ImageIcon imgback3;
+	private ButtonGroup btgSelect1,btgSelect2;
+	private JPanel panbox1,panbox2;
 	JButton btnB = new JButton(" Accept ");
 	int x = 10, y = 20, w = 100, h = 30;
 
 	public PlayerAndBall() {
 		this.setTitle("Name and Ball in Game");
-		this.setSize(400, 500);
+		this.setSize(400, 530);
 		this.setLayout(null);
 		setLocationRelativeTo(null);
 		// add
-		panbox = new JPanel();
+		panbox1 = new JPanel();
+		panbox2 = new JPanel();
 		add(lblinball);
 		lblinball.setSize(90, 90);
 		lblinball.setLocation(150, 265);
-		panbox.setLayout(new BorderLayout(14, 10));
+		panbox1.setLayout(new BorderLayout(14, 10));
+		panbox2.setLayout(new BorderLayout(14, 10));
 		optball1 = new JRadioButton("Ball 1");
 		optball2 = new JRadioButton("Ball 2");
 		optball3 = new JRadioButton("Ball 3");
+		optback1 = new JRadioButton("BackG 1");
+		optback2 = new JRadioButton("BackG 2");
+		optback3 = new JRadioButton("BackG 3");
 		add(lblBall);
 		lblBall.setForeground(Color.BLACK);
 		lblBall.setFont(new Font("Ball", Font.BOLD, 16));
 		lblBall.setBounds(x + 20, y + 170, w + 80, h);
-		btgSelect = new ButtonGroup();
-		btgSelect.add(optball1);
-		btgSelect.add(optball2);
-		btgSelect.add(optball3);
+		btgSelect1 = new ButtonGroup();
+		btgSelect2 = new ButtonGroup();
+		btgSelect1.add(optball1);
+		btgSelect1.add(optball2);
+		btgSelect1.add(optball3);
+		btgSelect2.add(optback1);
+		btgSelect2.add(optback2);
+		btgSelect2.add(optback3);
 		optball1.setSelected(true);
+		optback1.setSelected(true);
 		imgball1 = new ImageIcon("Image/ball_45.png");
 		imgball2 = new ImageIcon("Image/gai.png");
 		imgball3 = new ImageIcon("Image/kirby.png");
+//		imgback1 = new ImageIcon("Image/ball_45.png");
+//		imgback2 = new ImageIcon("Image/ball_45.png");
+//		imgback3 = new ImageIcon("Image/ball_45.png");
 		txtPlayer1.setText(PongPanel.namePlayer1);
 		txtPlayer2.setText(PongPanel.namePlayer2);
 		// ..
@@ -103,15 +119,24 @@ public class PlayerAndBall extends JDialog {
 		lblPlayer2.setBounds(x + 20, y + 130, w - 20, h);
 		txtPlayer1.setBounds(x + 90, y + 80, w + 140, h);
 		txtPlayer2.setBounds(x + 90, y + 130, w + 140, h);
-		this.add(panbox);
+		this.add(panbox1);
 		// Location selected ball
-		panbox.add(optball1, BorderLayout.WEST);
-		panbox.add(optball2, BorderLayout.CENTER);
-		panbox.add(optball3, BorderLayout.EAST);
-		panbox.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
-		panbox.setSize(210, 30);
-		panbox.setLocation(110, 230);
-		btnB.setBounds(x + 140, y + 350, w, h);
+		panbox1.add(optball1, BorderLayout.WEST);
+		panbox1.add(optball2, BorderLayout.CENTER);
+		panbox1.add(optball3, BorderLayout.EAST);
+		panbox1.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+		panbox1.setSize(210, 30);
+		panbox1.setLocation(110, 230);
+		btnB.setBounds(x + 140, y + 400, w, h);
+		
+		this.add(panbox2);
+		// Location selected ball
+		panbox2.add(optback1, BorderLayout.WEST);
+		panbox2.add(optback2, BorderLayout.CENTER);
+		panbox2.add(optback3, BorderLayout.EAST);
+		panbox2.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+		panbox2.setSize(250, 30);
+		panbox2.setLocation(90, 370);
 	}
 
 	public void Act() {
@@ -129,7 +154,7 @@ public class PlayerAndBall extends JDialog {
 				} else if (optball3.isSelected() == true) {
 					PongPanel.NumTypeBall = 2;
 				}
-				panbox.setVisible(false);
+				panbox1.setVisible(false);
 				lblPlayer1.setVisible(false);
 				lblPlayer2.setVisible(false);
 				txtPlayer1.setVisible(false);
