@@ -81,7 +81,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	/** Background. */
 	ImageIcon imgpt = new ImageIcon("Image/backG1.gif");
-	ImageIcon imgdr = new ImageIcon("Image/Welcome1.png");
+	ImageIcon imgdr = new ImageIcon("Image/minionbk.gif");
 	ImageIcon imgdri = new ImageIcon("Image/gameover.jpg");
 
 	/** State on the control keys. */
