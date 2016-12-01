@@ -52,7 +52,7 @@ public class PlayerAndBall extends JDialog {
 		panbox2 = new JPanel();
 		add(lblinball);
 		lblinball.setSize(90, 90);
-		lblinball.setLocation(150, 265);
+		lblinball.setLocation(160, 270);
 		panbox1.setLayout(new BorderLayout(14, 10));
 		panbox2.setLayout(new BorderLayout(14, 10));
 		optball1 = new JRadioButton("Ball 1");
@@ -86,6 +86,7 @@ public class PlayerAndBall extends JDialog {
 		// ..
 		SaveNamePlayer();
 		Act();
+		lblinball.setIcon(imgball1);
 		ActionListener action = new ActionListener() {
 
 			@Override
