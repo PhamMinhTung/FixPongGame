@@ -488,7 +488,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 			// TODO Draw a restart message
 			g.drawString("Press 'Spacebar' to Restart", 130, 400);
 			timer.stop();
-			Sound.play("Sound/Randomize14.wav");
+			Sound.play("Sound/Over.wav");
 		}
 	}
 
@@ -524,7 +524,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 			}
 		} else if (gameOver && e.getKeyCode() == KeyEvent.VK_SPACE) {
 			Sound.play("Sound/return.wav");
-			timer.start();
+			timer.restart();
 			gameOver = false;
 			showTitleScreen = true;
 			playerOneY = 250;
