@@ -70,6 +70,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 	private ImageIcon imgsup02;
 	private ImageIcon imgsup03;
 	private ImageIcon imgsup04;
+	private ImageIcon imgsup05;
 	private ButtonGroup btgSelect;
 	private JPanel panbox;
 	private boolean showRandom;
@@ -135,9 +136,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 		imgpanel = new ImageIcon("Image/panel.png");
 		imgpanel2 = new ImageIcon("Image/panel2.png");
 		imgsup01 = new ImageIcon("Image/tru.png");
-		imgsup02 = new ImageIcon("Image/tang.png");
+		imgsup02 = new ImageIcon("Image/cong.png");
 		imgsup03 = new ImageIcon("Image/25cam.png");
 		imgsup04 = new ImageIcon("Image/25xanh.png");
+		imgsup05 = new ImageIcon("Image/25xanh.png");
 		// add
 		panbox = new JPanel();
 		panbox.setLayout(new BorderLayout(14, 10));
@@ -471,8 +473,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener,
 					g.drawImage(imgsup04.getImage(), xRandom, yRandom,
 							diameterRan, diameterRan, null);
 				} else if (oRandom == 5) {
-					g.setColor(Color.WHITE);
-					g.fillOval(xRandom, yRandom, diameterRan, diameterRan);
+					g.drawImage(imgsup05.getImage(), xRandom, yRandom,
+							diameterRan, diameterRan, null);
 				}
 			}
 		} else if (gameOver) {
