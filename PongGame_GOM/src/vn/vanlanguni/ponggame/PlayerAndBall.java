@@ -105,7 +105,7 @@ public class PlayerAndBall extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				Sound.play("Sound/Accept.wav");
 				if (optball1.isSelected()) {
 					lblinball.setIcon(imgball1);
 				} else if (optball2.isSelected()) {
@@ -123,6 +123,7 @@ public class PlayerAndBall extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Sound.play("Sound/Accept.wav");
 				if (optback1.isSelected()) {
 					lblinball01.setIcon(imgback1);
 				} else if (optback2.isSelected()) {
@@ -193,6 +194,7 @@ public class PlayerAndBall extends JDialog {
 				PongPanel.namePlayer1 = txtPlayer1.getText();
 				PongPanel.namePlayer2 = txtPlayer2.getText();
 				dispose();
+				Sound.play("Sound/click.wav");
 
 			}
 		});
