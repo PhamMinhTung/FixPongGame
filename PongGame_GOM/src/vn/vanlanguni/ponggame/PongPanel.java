@@ -75,7 +75,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 	private boolean showRandom;
 	private int oRandom;
 	private Timer timer;
-	private int time = 600 / 60;
+	private int time = 800 / 60;
 	private int cooldown = 3;
 	private int side;
 
@@ -239,7 +239,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
-					time= 600/60;
+					time= 800/60;
+					timer.start();
 					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
@@ -268,7 +269,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
-					time= 600/60;
+					time= 800/60;
+					timer.start();
 					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
