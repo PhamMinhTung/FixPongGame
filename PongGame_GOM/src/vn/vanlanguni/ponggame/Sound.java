@@ -8,23 +8,23 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 /**
  * 
- * @author Huyen
+ * @author Của em
  *
  */
 public class Sound {
 	
-    public static synchronized void play(final String fileName) 
+    public static synchronized void play(final String fileMusic) 
     {
         // Note: use .wav files             
         new Thread(new Runnable() { 
             public void run() {
                 try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(fileName));
-                    clip.open(inputStream);
-                    clip.start(); 
+                    Clip clp = AudioSystem.getClip();
+                    AudioInputStream inStream = AudioSystem.getAudioInputStream(new File(fileMusic));
+                    clp.open(inStream);
+                    clp.start(); 
                 } catch (Exception e) {
-                    System.out.println("play sound error: " + e.getMessage() + " for " + fileName);
+                    System.out.println("play sound error: " + e.getMessage() + " for " + fileMusic);
                 }
             }
         }).start();

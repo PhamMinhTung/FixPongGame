@@ -43,7 +43,7 @@ import vn.vanlanguni.ponggame.Sound;
 
 /**
  * 
- * @author Invisible Man
+ * @author GoM
  *
  */
 public class PongPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
@@ -239,8 +239,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
-					time= 800/60;
-					timer.start();
 					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
@@ -269,8 +267,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
-					time= 800/60;
-					timer.start();
 					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
@@ -284,7 +280,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 				} else {
 
 					// If the ball hitting the paddle, it will bounce back
-					// FIXME Something wrong here
+					// FIXME Something wrong hereF
 					ballDeltaX *= -1;
 					Sound.play("Sound/pong.wav");
 					side = 2;
@@ -315,7 +311,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 								playerTwoHeight -= 10;
 							}
 							cooldown -= 1;
-							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 						} else if (oRandom == 2) {
@@ -325,19 +320,19 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 								playerTwoHeight += 20;
 							}
 							cooldown -= 1;
-							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 						} else if (oRandom == 3) {
 							diameter += 10;
 							cooldown -= 1;
-							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
+							if (cooldown == 0) {
+								diameter += 0;
+							}
 						} else if (oRandom == 4) {
 							diameter -= 10;
 							cooldown -= 1;
-							System.out.println(cooldown);
 							showRandom = false;
 							timeDisplay = ThreadLocalRandom.current().nextInt(5, 15 + 1) * 1000;
 							if (cooldown == 0) {

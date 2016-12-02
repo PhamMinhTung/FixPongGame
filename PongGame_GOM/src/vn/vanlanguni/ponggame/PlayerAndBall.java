@@ -20,7 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
- * @author Shu
+ * @author GoM
  *
  */
 public class PlayerAndBall extends JDialog {

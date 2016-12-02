@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author Invisible Man
+ * @author GoM
  *
  */
 public class MainGameUI extends JFrame{
