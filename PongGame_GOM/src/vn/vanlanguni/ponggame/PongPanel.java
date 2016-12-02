@@ -239,6 +239,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
+					time= 600/60;
+					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 2 Win, restart the game
@@ -266,6 +268,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener, Mo
 					playerOneHeight = 50;
 					playerTwoHeight = 50;
 					diameter = 25;
+					time= 600/60;
+					paddleSpeed = 5;
 					Sound.play("Sound/Jump3.wav");
 
 					// Player 1 Win, restart the game
